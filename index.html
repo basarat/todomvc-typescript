@@ -1,10 +1,9 @@
 <!doctype html>
-<html lang="en" ng-app="todomvc" data-framework="angularjs">
+<html lang="en" ng-app="todomvc">
 	<head>
 		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>AngularJS • TodoMVC</title>
-		<link rel="stylesheet" href="bower_components/todomvc-common/base.css">
+		<link rel="stylesheet" href="vendor/todomvc-common/base.css">
 		<style>[ng-cloak] { display: none; }</style>
 	</head>
 	<body>
@@ -49,18 +48,8 @@
 				<button id="clear-completed" ng-click="clearCompletedTodos()" ng-show="completedCount">Clear completed ({{completedCount}})</button>
 			</footer>
 		</section>
-		<footer id="info">
-			<p>Double-click to edit a todo</p>
-			<p>Credits:
-				<a href="http://twitter.com/cburgdorf">Christoph Burgdorf</a>,
-				<a href="http://ericbidelman.com">Eric Bidelman</a>,
-				<a href="http://jacobmumm.com">Jacob Mumm</a> and
-				<a href="http://igorminar.com">Igor Minar</a>
-			</p>
-			<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
-		</footer>
-		<script src="bower_components/todomvc-common/base.js"></script>
-		<script src="bower_components/angular/angular.js"></script>
+		<script src="vendor/todomvc-common/base.js"></script>
+		<script src="vendor/angular/angular.js"></script>
 		<script src="app/app.js"></script>
 		<script src="app/controllers/todoCtrl.js"></script>
 		<script src="app/services/todoStorage.js"></script>
