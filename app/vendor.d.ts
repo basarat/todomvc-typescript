@@ -1,0 +1,1 @@
+///<reference path="../vendor/defs/angularjs/angular.d.ts"/>
