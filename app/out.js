@@ -7,7 +7,7 @@ function aes(element) {
 var Controllers;
 (function (Controllers) {
     var TodoCtrl = (function () {
-        function TodoCtrl($scope, todoStorage, filterFilter) {
+        function TodoCtrl($scope, todoStorage) {
             var _this = this;
             this.todos = [];
             this.newTodo = '';
@@ -20,17 +20,20 @@ var Controllers;
             this.editedTodo = null;
 
             $scope.$watch('vm.todos', function (newValue, oldValue) {
-                _this.remainingCount = filterFilter(_this.todos, { completed: false }).length;
-                _this.completedCount = _this.todos.length - _this.remainingCount;
-                _this.allChecked = !_this.remainingCount;
                 if (newValue !== oldValue) {
                     todoStorage.put(_this.todos);
                 }
+
+                _this.remainingCount = _.filter(_this.todos, function (todo) {
+                    return !todo.completed;
+                }).length;
+                _this.completedCount = _this.todos.length - _this.remainingCount;
+                _this.allChecked = !_this.remainingCount;
             }, true);
         }
         TodoCtrl.prototype.addTodo = function () {
             var newTodo = this.newTodo.trim();
-            if (!newTodo.length) {
+            if (!newTodo) {
                 return;
             }
 
@@ -45,7 +48,7 @@ var Controllers;
         TodoCtrl.prototype.editTodo = function (todo) {
             this.editedTodo = todo;
 
-            this.originalTodo = angular.extend({}, todo);
+            this.originalTodo = _.clone(todo);
         };
 
         TodoCtrl.prototype.doneEditing = function (todo) {

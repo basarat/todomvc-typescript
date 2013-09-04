@@ -20,11 +20,9 @@ module Controllers {
 
         remainingCount: number;
         completedCount: number;
-        allChecked: boolean;
+        allChecked: boolean;        
 
-        statusFilter: any;
-
-        constructor($scope: TodoCtrlScope, todoStorage: TodoStorage, filterFilter) {
+        constructor($scope: TodoCtrlScope, todoStorage: TodoStorage) {
 
             // Expose the view model on the scope 
             $scope.vm = this;
@@ -33,20 +31,21 @@ module Controllers {
 
             this.editedTodo = null;
 
-
-            $scope.$watch('vm.todos',  (newValue, oldValue) => {
-                this.remainingCount = filterFilter(this.todos, { completed: false }).length;
-                this.completedCount = this.todos.length - this.remainingCount;
-                this.allChecked = !this.remainingCount;
-                if (newValue !== oldValue) { // This prevents unneeded calls to the local storage
+            $scope.$watch('vm.todos', (newValue, oldValue) => {                
+                // Save 
+                if (newValue !== oldValue) {
                     todoStorage.put(this.todos);
                 }
+                // Update ui 
+                this.remainingCount = _.filter(this.todos, (todo) => !todo.completed).length;
+                this.completedCount = this.todos.length - this.remainingCount;
+                this.allChecked = !this.remainingCount;                
             }, true);
         }
 
         addTodo() {
             var newTodo = this.newTodo.trim();
-            if (!newTodo.length) {
+            if (!newTodo) {
                 return;
             }
 
@@ -58,13 +57,13 @@ module Controllers {
             this.newTodo = '';
         }
 
-        editTodo(todo) {
+        editTodo(todo:Todo) {
             this.editedTodo = todo;
             // Clone the original todo to restore it on demand.
-            this.originalTodo = angular.extend({}, todo);
+            this.originalTodo = _.clone(todo);
         }
 
-        doneEditing(todo) {
+        doneEditing(todo:Todo) {
             this.editedTodo = null;
             todo.title = todo.title.trim();
 
@@ -73,12 +72,12 @@ module Controllers {
             }
         }
 
-        revertEditing(todo) {
+        revertEditing(todo:Todo) {
             this.todos[this.todos.indexOf(todo)] = this.originalTodo;
             this.doneEditing(this.originalTodo);
         }
 
-        removeTodo(todo) {
+        removeTodo(todo:Todo) {
             this.todos.splice(this.todos.indexOf(todo), 1);
         }
 
@@ -88,7 +87,7 @@ module Controllers {
             });
         }
 
-        markAll(completed) {
+        markAll(completed:boolean) {
             this.todos.forEach( (todo) => {
                 todo.completed = completed;
             });
