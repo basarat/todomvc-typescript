@@ -15,8 +15,9 @@ module Controllers {
 
         todos: Todo[] = [];
         newTodo: string = '';
-        editedTodo: any = null;
-        originalTodo: any = null;        
+
+        editedTodo: Todo = null;
+        originalTodo: Todo = null;        
 
         remainingCount: number;
         completedCount: number;
@@ -63,7 +64,8 @@ module Controllers {
             this.originalTodo = _.clone(todo);
         }
 
-        doneEditing(todo:Todo) {
+        doneEditing(todo: Todo) {  
+            console.log(this.editedTodo);          
             this.editedTodo = null;
             todo.title = todo.title.trim();
 
@@ -72,7 +74,7 @@ module Controllers {
             }
         }
 
-        revertEditing(todo:Todo) {
+        revertEditing(todo: Todo) {            
             this.todos[this.todos.indexOf(todo)] = this.originalTodo;
             this.doneEditing(this.originalTodo);
         }

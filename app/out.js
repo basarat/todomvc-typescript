@@ -52,6 +52,7 @@ var Controllers;
         };
 
         TodoCtrl.prototype.doneEditing = function (todo) {
+            console.log(this.editedTodo);
             this.editedTodo = null;
             todo.title = todo.title.trim();
 
@@ -84,19 +85,23 @@ var Controllers;
     })();
     Controllers.TodoCtrl = TodoCtrl;
 })(Controllers || (Controllers = {}));
-todomvc.directive('todoBlur', function () {
+todomvc.directive('todoBlur', function ($parse) {
     return function (scope, elem, attrs) {
         elem.bind('blur', function () {
-            scope.$apply(attrs.todoBlur);
+            scope.$apply(function () {
+                $parse(attrs.todoBlur, scope);
+            });
         });
     };
 });
-todomvc.directive('todoEscape', function () {
+todomvc.directive('todoEscape', function ($parse) {
     var ESCAPE_KEY = 27;
     return function (scope, elem, attrs) {
         elem.bind('keydown', function (event) {
             if (event.keyCode === ESCAPE_KEY) {
-                scope.$apply(attrs.todoEscape);
+                scope.$apply(function () {
+                    $parse(attrs.todoEscape)(scope);
+                });
             }
         });
     };
