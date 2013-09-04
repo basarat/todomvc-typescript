@@ -8,3 +8,5 @@
 /// <reference path="services/todoStorage.ts" />
 /// <reference path="vendor.d.ts" />
 //grunt-end
+
+/// <reference path="controllers/controllers.ts" />
