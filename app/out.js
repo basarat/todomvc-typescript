@@ -91,7 +91,7 @@ todomvc.directive('todoBlur', function () {
         });
     };
 });
-todomvc.directive('todoBlur', function () {
+todomvc.directive('todoEscape', function () {
     var ESCAPE_KEY = 27;
     return function (scope, elem, attrs) {
         elem.bind('keydown', function (event) {
