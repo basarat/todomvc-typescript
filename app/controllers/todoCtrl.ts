@@ -1,5 +1,4 @@
-/*global todomvc, angular */
-'use strict';
+///<reference path="../reference.ts"/>
 
 /**
  * The main controller for the app. The controller:

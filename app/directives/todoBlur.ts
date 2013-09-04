@@ -1,5 +1,5 @@
-/*global todomvc */
-'use strict';
+///<reference path="../reference.ts"/>
+
 
 /**
  * Directive that executes an expression when the element it is applied to loses focus

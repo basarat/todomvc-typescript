@@ -1,8 +1,7 @@
-/*global todomvc */
-'use strict';
+///<reference path="../reference.ts"/>
 
 /**
- * Services that persists and retrieves TODOs from localStorage
+ * Service that persists and retrieves TODOs from localStorage
  */
 todomvc.factory('todoStorage', function () {
 	var STORAGE_ID = 'todos-angularjs';
