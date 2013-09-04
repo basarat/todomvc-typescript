@@ -110,17 +110,20 @@ todomvc.directive('todoFocus', function todoFocus($timeout) {
         });
     };
 });
-todomvc.factory('todoStorage', function () {
-    var STORAGE_ID = 'todos-angularjs';
-
-    return {
-        get: function () {
-            return JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
-        },
-        put: function (todos) {
-            localStorage.setItem(STORAGE_ID, JSON.stringify(todos));
-        }
+var TodoStorage = (function () {
+    function TodoStorage() {
+        this.STORAGE_ID = 'todos-angularjs';
+    }
+    TodoStorage.prototype.get = function () {
+        return JSON.parse(localStorage.getItem(this.STORAGE_ID) || '[]');
     };
-});
+
+    TodoStorage.prototype.put = function (todos) {
+        localStorage.setItem(this.STORAGE_ID, JSON.stringify(todos));
+    };
+    return TodoStorage;
+})();
+
+todomvc.service('todoStorage', TodoStorage);
 todomvc.controller(Controllers);
 //# sourceMappingURL=out.js.map

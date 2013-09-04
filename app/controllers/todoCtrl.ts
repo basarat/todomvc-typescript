@@ -7,7 +7,8 @@ module Controllers {
      * - exposes the model to the template and provides event handlers
      */
     class TodoCtrl {
-        constructor($scope, $location, todoStorage, filterFilter) {
+
+        constructor($scope, $location, todoStorage:TodoStorage, filterFilter) {
             var todos = $scope.todos = todoStorage.get();
 
             $scope.newTodo = '';
