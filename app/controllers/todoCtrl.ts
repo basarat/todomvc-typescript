@@ -35,7 +35,7 @@ module Controllers {
             $scope.$watch('vm.todos', (newValue, oldValue) => {                
                 // Save 
                 if (newValue !== oldValue) {
-                    todoStorage.put(this.todos);
+                    todoStorage.put(angular.copy(this.todos));
                 }
                 // Update ui 
                 this.remainingCount = _.filter(this.todos, (todo) => !todo.completed).length;
