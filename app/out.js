@@ -7,7 +7,7 @@ function aes(element) {
 var Controllers;
 (function (Controllers) {
     var TodoCtrl = (function () {
-        function TodoCtrl($scope, $location, todoStorage, filterFilter) {
+        function TodoCtrl($scope, todoStorage, filterFilter) {
             var _this = this;
             this.todos = [];
             this.newTodo = '';
@@ -27,16 +27,6 @@ var Controllers;
                     todoStorage.put(_this.todos);
                 }
             }, true);
-
-            if ($location.path() === '') {
-                $location.path('/');
-            }
-
-            this.location = $location;
-
-            $scope.$watch('vm.location.path()', function (path) {
-                _this.statusFilter = (path === '/active') ? { completed: false } : (path === '/completed') ? { completed: true } : null;
-            });
         }
         TodoCtrl.prototype.addTodo = function () {
             var newTodo = this.newTodo.trim();

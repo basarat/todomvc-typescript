@@ -16,9 +16,7 @@ module Controllers {
         todos: Todo[] = [];
         newTodo: string = '';
         editedTodo: any = null;
-        originalTodo: any = null;
-
-        location: ng.ILocationService;
+        originalTodo: any = null;        
 
         remainingCount: number;
         completedCount: number;
@@ -26,7 +24,7 @@ module Controllers {
 
         statusFilter: any;
 
-        constructor($scope: TodoCtrlScope, $location, todoStorage: TodoStorage, filterFilter) {
+        constructor($scope: TodoCtrlScope, todoStorage: TodoStorage, filterFilter) {
 
             // Expose the view model on the scope 
             $scope.vm = this;
@@ -44,19 +42,6 @@ module Controllers {
                     todoStorage.put(this.todos);
                 }
             }, true);
-
-            if ($location.path() === '') {
-                $location.path('/');
-            }
-
-            this.location = $location;
-
-            $scope.$watch('vm.location.path()',  (path) => {            
-                this.statusFilter = (path === '/active') ?
-                { completed: false } : (path === '/completed') ?
-                { completed: true } : null;
-            });
-
         }
 
         addTodo() {
