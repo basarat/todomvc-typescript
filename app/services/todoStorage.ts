@@ -6,11 +6,11 @@
 class TodoStorage {
     STORAGE_ID = 'todos-angularjs';
 
-    get() {
+    get():Todo[] {
         return JSON.parse(localStorage.getItem(this.STORAGE_ID) || '[]');
     }
 
-    put(todos) {
+    put(todos:Todo[]) {
         localStorage.setItem(this.STORAGE_ID, JSON.stringify(todos));
     }
 }    

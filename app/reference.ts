@@ -6,6 +6,7 @@
 /// <reference path="directives/todoEscape.ts" />
 /// <reference path="directives/todoFocus.ts" />
 /// <reference path="services/todoStorage.ts" />
+/// <reference path="types/todo.ts" />
 /// <reference path="vendor.d.ts" />
 //grunt-end
 

@@ -137,7 +137,7 @@
 
 	function getFile(file, callback) {
 		if (!location.host) {
-			return console.info('Miss the info bar? Run TodoMVC from a server to avoid a cross-origin error.');
+		    return '';//console.info('Miss the info bar? Run TodoMVC from a server to avoid a cross-origin error.');
 		}
 
 		var xhr = new XMLHttpRequest();
