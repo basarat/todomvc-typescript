@@ -21,9 +21,7 @@
         </header>
 
         <section id="main" ng-show="vm.todos.length" ng-cloak>
-        
-            <div style="background:grey; border:1px solid grey; width:{{vm.completedCount/vm.todos.length * 100}}%">&nbsp;</div>
-
+            <progressbar progress="vm.completedCount/vm.todos.length * 100"></progressbar>
             <input id="toggle-all" type="checkbox" ng-model="vm.allChecked" ng-click="vm.markAll(vm.allChecked)">            
             <ul id="todo-list">
                 <li ng-repeat="todo in vm.todos" ng-class="{completed: todo.completed, editing: todo == vm.editedTodo}">

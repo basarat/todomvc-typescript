@@ -4,6 +4,13 @@ var lastaes;
 function aes(element) {
     return lastaes = angular.element(element).scope();
 }
+var progressbar;
+(function (progressbar) {
+    (function (tpl) {
+        tpl.html = '<div style="background: grey; border: 1px solid grey; width: {{progress}}%">&nbsp;</div>';
+    })(progressbar.tpl || (progressbar.tpl = {}));
+    var tpl = progressbar.tpl;
+})(progressbar || (progressbar = {}));
 var Controllers;
 (function (Controllers) {
     var TodoCtrl = (function () {
@@ -85,6 +92,15 @@ var Controllers;
     })();
     Controllers.TodoCtrl = TodoCtrl;
 })(Controllers || (Controllers = {}));
+todomvc.directive('progressbar', function () {
+    return {
+        restrict: 'EAC',
+        template: progressbar.tpl.html,
+        scope: {
+            progress: '='
+        }
+    };
+});
 todomvc.directive('todoBlur', function ($parse) {
     return function (scope, elem, attrs) {
         elem.bind('blur', function () {
